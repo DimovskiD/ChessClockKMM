@@ -1,0 +1,44 @@
+CREATE TABLE Breed (
+id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+name TEXT NOT NULL UNIQUE,
+favorite INTEGER AS Boolean NOT NULL DEFAULT 0
+);
+
+selectAll:
+SELECT * FROM Breed;
+
+selectById:
+SELECT * FROM Breed WHERE id = ?;
+
+selectByName:
+SELECT * FROM Breed WHERE name = ?;
+
+insertBreed:
+INSERT OR IGNORE INTO Breed(name)
+VALUES (?);
+
+deleteAll:
+DELETE FROM Breed;
+
+updateFavorite:
+UPDATE Breed SET favorite = ? WHERE id = ?;
+
+CREATE TABLE ChessGame (
+id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+name TEXT NOT NULL UNIQUE,
+time INTEGER NOT NULL,
+increment INTEGER NOT NULL
+);
+
+getChessGameById:
+SELECT * FROM ChessGame WHERE id = ?;
+
+getAllChessGames:
+SELECT * FROM ChessGame;
+
+addChessGame:
+INSERT OR IGNORE INTO ChessGame(name, time, increment)
+VALUES (?, ?, ?);
+
+deleteChessGame:
+DELETE FROM ChessGame WHERE id =?;
