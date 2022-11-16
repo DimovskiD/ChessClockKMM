@@ -14,13 +14,11 @@ import shared
 private let log = koin.loggerWithTag(tag: "ChessGame")
 
 class ObservableChessGameModel: ObservableObject {
-    
     private var chessViewModel: ChessGameCallbackViewModel?
     var gameId: Int64 = 1
     @Published
     var chessGameState: ChessGameViewState?
     private var cancellables = [AnyCancellable]()
-    
     func activate() {
         let chessViewModel = KotlinDependencies.shared.getChessGameViewModel(gameId: gameId)
         doPublish(chessViewModel.chessGameState) { [weak self] chessState in
@@ -37,11 +35,9 @@ class ObservableChessGameModel: ObservableObject {
     func onPlayPausePressed() {
         chessViewModel?.playPauseClicked()
     }
-    
     func switchPlayer() {
         chessViewModel?.switchPlayer()
     }
-    
     func onRestartClicked() {
         chessViewModel?.onRestartClicked()
     }
@@ -68,28 +64,16 @@ struct ChessGameScreen: View {
                     observableModel.switchPlayer()
                 }
                 VStack {
-                    VStack {
-                        Text(TimeUtilsKt.formatTime(
-                            observableModel.chessGameState?.playerTwo.timeInMillis ?? 0, showMillis: true
-                        )).foregroundColor(.white).font(.largeTitle)
-                        HStack {
-                            Text("Total moves: " + String(observableModel.chessGameState?.playerTwo.movesMade ?? 0))
-                                .foregroundColor(.white)
-                        }.frame(alignment: .bottom)
-                    }.frame(
-                        width: UIScreen.main.bounds.width,
-                        height: UIScreen.main.bounds.height/2,
-                        alignment: Alignment.center
+                    ChessGamePlayerComponent(
+                        timeRemaining: observableModel.chessGameState?.playerTwo.timeInMillis ?? 0,
+                        movesMade: observableModel.chessGameState?.playerTwo.movesMade ?? 0,
+                        color: .white
                     ).rotationEffect(Angle(degrees: 180))
-                    VStack {
-                        Text(TimeUtilsKt.formatTime(
-                            observableModel.chessGameState?.playerOne.timeInMillis ?? 0, showMillis: true
-                        )).font(.largeTitle)
-                        HStack {
-                            Text("Total moves: " + String(observableModel.chessGameState?.playerOne.movesMade ?? 0))
-                        }.frame(alignment: .bottom)
-                    }.frame(width: UIScreen.main.bounds.width,
-                            height: UIScreen.main.bounds.height/2)
+                    ChessGamePlayerComponent(
+                        timeRemaining: observableModel.chessGameState?.playerOne.timeInMillis ?? 0,
+                        movesMade: observableModel.chessGameState?.playerOne.movesMade ?? 0,
+                        color: .black
+                    )
                 }.onTapGesture {
                     observableModel.switchPlayer()
                 }
@@ -120,5 +104,27 @@ struct ChessGameScreen: View {
         .onDisappear(perform: {
             observableModel.deactivate()
         })
+    }
+}
+
+struct ChessGamePlayerComponent: View {
+    var timeRemaining: Int64
+    var movesMade: Int32
+    var color: Color
+
+    var body: some View {
+        VStack {
+            Text(TimeUtilsKt.formatTime(
+                timeRemaining, showMillis: true
+            )).foregroundColor(color).font(.largeTitle)
+            HStack {
+                Text("Total moves: " + String(movesMade))
+                    .foregroundColor(color)
+            }.frame(alignment: .bottom)
+        }.frame(
+            width: UIScreen.main.bounds.width,
+            height: UIScreen.main.bounds.height/2,
+            alignment: Alignment.center
+        )
     }
 }
