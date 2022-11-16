@@ -37,7 +37,7 @@ actual val platformModule = module {
 
     single { ChessGamePickerCallbackViewModel(get(), getWith("ChessGamePickerCallbackViewModel")) }
 
-    factory { (gameId: Long) ->  ChessGameViewModel(gameId, get(), getWith("ChessGameCallbackViewModel")) }
+    factory { (gameId: Long) ->  ChessGameCallbackViewModel(gameId, get(), getWith("ChessGameCallbackViewModel")) }
 
 }
 
@@ -50,6 +50,8 @@ fun Koin.loggerWithTag(tag: String) =
 object KotlinDependencies : KoinComponent {
     fun getBreedViewModel() = getKoin().get<BreedCallbackViewModel>()
 
-    fun getChessGamePickerViewModel() : ChessGamePickerCallbackViewModel = getKoin().get<ChessGamePickerCallbackViewModel>()
+    fun getChessGamePickerViewModel() = getKoin().get<ChessGamePickerCallbackViewModel>()
+
+    fun getChessGameViewModel(gameId: Long) = getKoin().get<ChessGameCallbackViewModel> { parametersOf(gameId) }
 
 }

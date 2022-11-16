@@ -44,7 +44,7 @@ class ChessGamePickerViewModel(
     }
 
     fun onCreateNewGameClicked() {
-        insertChessGame(ChessGame(-1L, "te2345", 223540, 1))
+        insertChessGame(ChessGame(2, "te322345", 2235233340, 1))
     }
 
     private fun insertChessGame(game: ChessGame): Job {

@@ -19,6 +19,7 @@ class ChessGameViewModel(
 ) : ViewModel() {
     private val log = log.withTag("ChessGamesViewModel")
     private val timer: KMMTimer = KMMTimer("ChessTimer", 100, 0) {
+        log.i("TIMER WORKS")
         if (mutableChessGameState.value.activePlayer != null && mutableChessGameState.value.gameState == GameState.RESUMED) {
             mutableChessGameState.update {
                 if (it.activePlayer != null) {
