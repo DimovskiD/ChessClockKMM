@@ -105,6 +105,6 @@ kotlin {
 
 sqldelight {
     database("KaMPKitDb") {
-        packageName = "co.touchlab.kampkit.db"
+        packageName = "com.deluxe1.chessclock.db"
     }
 }
