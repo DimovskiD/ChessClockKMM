@@ -22,7 +22,7 @@ class MainApp : Application() {
                 viewModel { ChessGamePickerViewModel(get(), get { parametersOf("ChessGameViewModel") }) }
                 viewModel { (gameId: Long) -> ChessGameViewModel(gameId, get(), get { parametersOf("ChessGameViewModel") }) }
                 single<SharedPreferences> {
-                    get<Context>().getSharedPreferences("KAMPSTARTER_SETTINGS", Context.MODE_PRIVATE)
+                    get<Context>().getSharedPreferences("CHESS_CLOCK_SETTINGS", Context.MODE_PRIVATE)
                 }
                 single<AppInfo> { AndroidAppInfo }
                 single {

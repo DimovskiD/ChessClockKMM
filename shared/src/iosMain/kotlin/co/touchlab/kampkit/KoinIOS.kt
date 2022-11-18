@@ -1,8 +1,6 @@
 package co.touchlab.kampkit
 
 import co.touchlab.kampkit.db.KaMPKitDb
-import co.touchlab.kampkit.models.ChessGamePickerViewModel
-import co.touchlab.kampkit.models.ChessGameViewModel
 import co.touchlab.kermit.Logger
 import com.russhwolf.settings.NSUserDefaultsSettings
 import com.russhwolf.settings.Settings
@@ -33,8 +31,6 @@ actual val platformModule = module {
 
     single { Darwin.create() }
 
-    single { BreedCallbackViewModel(get(), getWith("BreedCallbackViewModel")) }
-
     single { ChessGamePickerCallbackViewModel(get(), getWith("ChessGamePickerCallbackViewModel")) }
 
     factory { (gameId: Long) ->  ChessGameCallbackViewModel(gameId, get(), getWith("ChessGameCallbackViewModel")) }
@@ -48,7 +44,6 @@ fun Koin.loggerWithTag(tag: String) =
 
 @Suppress("unused") // Called from Swift
 object KotlinDependencies : KoinComponent {
-    fun getBreedViewModel() = getKoin().get<BreedCallbackViewModel>()
 
     fun getChessGamePickerViewModel() = getKoin().get<ChessGamePickerCallbackViewModel>()
 

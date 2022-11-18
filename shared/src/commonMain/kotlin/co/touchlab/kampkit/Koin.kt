@@ -1,8 +1,5 @@
 package co.touchlab.kampkit
 
-import co.touchlab.kampkit.ktor.DogApi
-import co.touchlab.kampkit.ktor.DogApiImpl
-import co.touchlab.kampkit.models.BreedRepository
 import co.touchlab.kampkit.models.ChessGameRepository
 import co.touchlab.kampkit.usecase.DeleteChessGame
 import co.touchlab.kampkit.usecase.GetAllChessGames
@@ -53,12 +50,7 @@ private val coreModule = module {
             Dispatchers.Default
         )
     }
-    single<DogApi> {
-        DogApiImpl(
-            getWith("DogApiImpl"),
-            get()
-        )
-    }
+
     single<Clock> {
         Clock.System
     }
@@ -70,16 +62,6 @@ private val coreModule = module {
     val baseLogger =
         Logger(config = StaticConfig(logWriterList = listOf(platformLogWriter())), "KampKit")
     factory { (tag: String?) -> if (tag != null) baseLogger.withTag(tag) else baseLogger }
-
-    single {
-        BreedRepository(
-            get(),
-            get(),
-            get(),
-            getWith("BreedRepository"),
-            get()
-        )
-    }
 
     single {
         ChessGameRepository(
