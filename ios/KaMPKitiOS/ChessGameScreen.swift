@@ -15,11 +15,10 @@ private let log = koin.loggerWithTag(tag: "ChessGame")
 
 class ObservableChessGameModel: ObservableObject {
     private var chessViewModel: ChessGameCallbackViewModel?
-    var gameId: Int64 = 1
     @Published
     var chessGameState: ChessGameViewState?
     private var cancellables = [AnyCancellable]()
-    func activate() {
+    func activate(gameId: Int64) {
         let chessViewModel = KotlinDependencies.shared.getChessGameViewModel(gameId: gameId)
         doPublish(chessViewModel.chessGameState) { [weak self] chessState in
             self?.chessGameState = chessState
@@ -46,6 +45,7 @@ class ObservableChessGameModel: ObservableObject {
 struct ChessGameScreen: View {
     @StateObject
     var observableModel = ObservableChessGameModel()
+    var gameId: Int64
     var body: some View {
         VStack {
             ZStack {
@@ -99,7 +99,7 @@ struct ChessGameScreen: View {
                 }
             }
         }.onAppear(perform: {
-            observableModel.activate()
+            observableModel.activate(gameId: gameId)
         })
         .onDisappear(perform: {
             observableModel.deactivate()

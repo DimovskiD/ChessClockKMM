@@ -18,6 +18,7 @@ class ChessGamePickerViewModel(
     private val mutableChessGameState: MutableStateFlow<ChessGamePickerViewState> =
         MutableStateFlow(ChessGamePickerViewState(isLoading = true))
 
+    val inputConfig = InputConfig(30, 3, 3)
     val chessGameState: StateFlow<ChessGamePickerViewState> = mutableChessGameState
 
     init {
@@ -43,11 +44,13 @@ class ChessGamePickerViewModel(
         }
     }
 
-    fun onCreateNewGameClicked() {
-        insertChessGame(ChessGame(2, "te322345", 2235233340, 1))
+    fun createChessGame(name: String, durationInMinutes: Int, incrementInSeconds: Int, id : Long = -1L) : ChessGame {
+        val duration = durationInMinutes * 60 * 1000L
+        val increment = incrementInSeconds.toLong()
+        return ChessGame(name = name, time =  duration, increment = increment, id = id)
     }
 
-    private fun insertChessGame(game: ChessGame): Job {
+    fun insertChessGame(game: ChessGame): Job {
         return viewModelScope.launch {
             useCases.upsertChessGame(game)
         }

@@ -31,6 +31,8 @@ fun ChessGamePickerScreen(
         onSuccess = { data -> log.v { "View updating with ${data.size} games" } },
         onError = { exception -> log.e { "Displaying error: $exception" } },
         onOpen = { onNavigateToChessGame(it) },
-        onCreateNewClicked = viewModel::onCreateNewGameClicked
+        onCreateNewClicked = {
+            // viewModel.onCreateNewGameClicked(it)
+        }
     )
 }
