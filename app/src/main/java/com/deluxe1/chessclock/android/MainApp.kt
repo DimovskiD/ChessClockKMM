@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import com.deluxe1.chessclock.AppInfo
+import com.deluxe1.chessclock.db.ChessGame
 import com.deluxe1.chessclock.initKoin
 import com.deluxe1.chessclock.models.ChessGamePickerViewModel
 import com.deluxe1.chessclock.models.ChessGameViewModel
@@ -20,7 +21,7 @@ class MainApp : Application() {
             module {
                 single<Context> { this@MainApp }
                 viewModel { ChessGamePickerViewModel(get(), get { parametersOf("ChessGameViewModel") }) }
-                viewModel { (gameId: Long) -> ChessGameViewModel(gameId, get(), get { parametersOf("ChessGameViewModel") }) }
+                viewModel { (game: ChessGame) -> ChessGameViewModel(game, get { parametersOf("ChessGameViewModel") }) }
                 single<SharedPreferences> {
                     get<Context>().getSharedPreferences("CHESS_CLOCK_SETTINGS", Context.MODE_PRIVATE)
                 }

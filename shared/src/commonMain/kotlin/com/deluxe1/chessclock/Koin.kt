@@ -74,7 +74,7 @@ private val coreModule = module {
             GetAllChessGames(get()),
             UpsertChessGame(get()),
             DeleteChessGame(get()),
-            GetChessGameById(get())
+            GetChessGameById(get()),
         )
     }
 }

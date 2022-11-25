@@ -2,6 +2,7 @@ package com.deluxe1.chessclock
 
 import com.deluxe1.chessclock.db.KaMPKitDb
 import co.touchlab.kermit.Logger
+import com.deluxe1.chessclock.db.ChessGame
 import com.russhwolf.settings.NSUserDefaultsSettings
 import com.russhwolf.settings.Settings
 import com.squareup.sqldelight.db.SqlDriver
@@ -33,7 +34,7 @@ actual val platformModule = module {
 
     single { ChessGamePickerCallbackViewModel(get(), getWith("ChessGamePickerCallbackViewModel")) }
 
-    factory { (gameId: Long) ->  ChessGameCallbackViewModel(gameId, get(), getWith("ChessGameCallbackViewModel")) }
+    factory { (game: ChessGame) ->  ChessGameCallbackViewModel(game, getWith("ChessGameCallbackViewModel")) }
 
 }
 
@@ -47,6 +48,6 @@ object KotlinDependencies : KoinComponent {
 
     fun getChessGamePickerViewModel() = getKoin().get<ChessGamePickerCallbackViewModel>()
 
-    fun getChessGameViewModel(gameId: Long) = getKoin().get<ChessGameCallbackViewModel> { parametersOf(gameId) }
+    fun getChessGameViewModel(game: ChessGame) = getKoin().get<ChessGameCallbackViewModel> { parametersOf(game) }
 
 }

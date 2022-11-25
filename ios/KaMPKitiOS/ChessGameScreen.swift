@@ -18,8 +18,8 @@ class ObservableChessGameModel: ObservableObject {
     @Published
     var chessGameState: ChessGameViewState?
     private var cancellables = [AnyCancellable]()
-    func activate(gameId: Int64) {
-        let chessViewModel = KotlinDependencies.shared.getChessGameViewModel(gameId: gameId)
+    func activate(game: ChessGame) {
+        let chessViewModel = KotlinDependencies.shared.getChessGameViewModel(game: game)
         doPublish(chessViewModel.chessGameState) { [weak self] chessState in
             self?.chessGameState = chessState
         }.store(in: &cancellables)
@@ -45,7 +45,8 @@ class ObservableChessGameModel: ObservableObject {
 struct ChessGameScreen: View {
     @StateObject
     var observableModel = ObservableChessGameModel()
-    var gameId: Int64
+    var game: ChessGame
+    
     var body: some View {
         VStack {
             ZStack {
@@ -99,7 +100,7 @@ struct ChessGameScreen: View {
                 }
             }
         }.onAppear(perform: {
-            observableModel.activate(gameId: gameId)
+            observableModel.activate(game: game)
         })
         .onDisappear(perform: {
             observableModel.deactivate()

@@ -59,13 +59,17 @@ class ObservableChessGamePickerModel: ObservableObject {
 
     func upsertGame(name: String, durationInMinutes: Int64, incrementsInSeconds: Int64, id: Int64) {
         if (chessViewModel != nil) {
-            var game : ChessGame = chessViewModel!.getChessGame(name: name,
-                                                                durationInMinutes: Int32(durationInMinutes),
-                                                                incrementInSeconds: Int32(incrementsInSeconds),
-                                                                id: id)
-            chessViewModel?.upsertChessGame(chessGame: game)
+            chessViewModel?.upsertChessGame(name: name,
+                                            durationInMinutes: Int32(durationInMinutes),
+                                            incrementInSeconds: Int32(incrementsInSeconds),
+                                            id: id)
         }
     }
+    
+    func isValid(title: String, duration: Int32, increment: Int32) -> Bool {
+        return chessViewModel?.isValid(name: title, durationInMinutes: duration, incrementInSeconds: increment) ?? false
+    }
+    
     func onGameClick(game: ChessGame) {}
 }
 
@@ -81,7 +85,7 @@ struct ChessGameListScreen: View {
             onGameClick: { observableModel.onGameClick(game: $0) },
             onSaveGame: { id, name, duration, increment in
                 observableModel.upsertGame(name: name, durationInMinutes: duration, incrementsInSeconds: increment, id: id)
-            },
+            }, isValid: observableModel.isValid,
             inputConfig: observableModel.inputConfig
         )
         .onAppear(perform: {
@@ -99,8 +103,10 @@ struct ChessGamesListContent: View {
     var error: String?
     var onGameClick: (ChessGame) -> Void
     var onSaveGame: (Int64, String, Int64, Int64) -> Void
+    var isValid: (String, Int32, Int32) -> Bool
     var inputConfig: InputConfig
     @State private var showingBottomSheet = false
+    
 
     var body: some View {
         ZStack {
@@ -109,7 +115,7 @@ struct ChessGamesListContent: View {
                     NavigationView {
                         List(chessGames, id: \.id) { game in
                             NavigationLink {
-                                ChessGameScreen(gameId: game.id)
+                                ChessGameScreen(game: game)
                             } label: {
                                 ChessGameRowView(game: game) {
                                     onGameClick(game)
@@ -127,7 +133,7 @@ struct ChessGamesListContent: View {
                 }.sheet(isPresented: $showingBottomSheet) {
                     AddChessGameListContent(chessGame: nil,  inputConfig: inputConfig, onSaveGame: {id, name, duration, increment in
                         onSaveGame(id, name, duration ?? Int64(0), increment ?? Int64(0))
-                    },onCancel: { showingBottomSheet.toggle() })
+                    },onCancel: { showingBottomSheet.toggle() }, isValid: isValid)
                     //                                    .presentationDetents([.fraction(0.15)])
                 }
                 if loading { Text("Loading...") }
@@ -141,6 +147,7 @@ struct AddChessGameListContent: View {
     var inputConfig: InputConfig
     var onSaveGame: (Int64, String, Int64?, Int64?) -> Void
     var onCancel: () -> Void
+    var isValid: (String, Int32, Int32) -> Bool
     
     @State
     var title: String = ""
@@ -152,13 +159,14 @@ struct AddChessGameListContent: View {
     var saveFlag: Bool = false
 
     init(chessGame: ChessGame? = nil, inputConfig: InputConfig,
-         onSaveGame: @escaping (Int64, String, Int64?, Int64?) -> Void, onCancel: @escaping () -> Void) {
+         onSaveGame: @escaping (Int64, String, Int64?, Int64?) -> Void, onCancel: @escaping () -> Void, isValid: @escaping (String, Int32, Int32) -> Bool) {
         self.chessGame = chessGame
         self.inputConfig = inputConfig
         self.onSaveGame = onSaveGame
         self.onCancel = onCancel
         self.increment = ""
         self.durationInMinutes = ""
+        self.isValid = isValid
     }
 
     var body: some View {
@@ -191,18 +199,25 @@ struct AddChessGameListContent: View {
                         Text("Save Game?")
                     }
                 }
-            }.toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button("Start") {
-                        if (saveFlag) {
-                            onSaveGame(chessGame?.id ?? -1, title, Int64(durationInMinutes), Int64(increment)) }
-                        onCancel() //todo navigate to game 
-                    }
-                    }
+            }.toolbar(content: {
+                let game = ChessGame(id: chessGame?.id ?? -1, name: title,
+                                     time: (Int64(durationInMinutes) ?? 0) * 60 * 1000,
+                                     increment: (Int64(increment) ?? 0))
+                ToolbarItem {
+                    NavigationLink() {
+                        ChessGameScreen(game: game)
+                    } label: {
+                        Text("Start")
+                    }.disabled(!isValid(title, Int32(durationInMinutes) ?? 0, Int32(increment) ?? 0)).onDisappear(perform: {
+                        if saveFlag {
+                            onSaveGame(game.id, game.name, Int64(durationInMinutes), Int64(increment))
+                        }
+                    })
+                }
                     ToolbarItem(placement: .cancellationAction) {
                         Button("Cancel") { onCancel() }
                     }
-                }.navigationBarTitle("New game")
+                }).navigationBarTitle("New game")
         }
     }
 }
@@ -231,7 +246,8 @@ struct ChessGamePickerScreen_Previews: PreviewProvider {
             ],
             error: nil,
             onGameClick: { _ in },
-            onSaveGame: {_,_,_,_  in},
+            onSaveGame: {_,_,_,_ in},
+            isValid: {_,_,_ in true},
             inputConfig: InputConfig(maxCharsName: 0,maxDigitsDuration: 0,maxDigitsIncrement: 0)
         )
     }

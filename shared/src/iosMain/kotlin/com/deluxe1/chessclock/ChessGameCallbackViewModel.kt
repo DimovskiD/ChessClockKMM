@@ -4,15 +4,15 @@ import com.deluxe1.chessclock.data.Player
 import com.deluxe1.chessclock.models.CallbackViewModel
 import com.deluxe1.chessclock.models.ChessGameViewModel
 import co.touchlab.kermit.Logger
+import com.deluxe1.chessclock.db.ChessGame
 
 @Suppress("Unused") // Members are called from Swift
 class ChessGameCallbackViewModel(
-    gameId: Long,
-    useCases: UseCases,
+    chessGame: ChessGame,
     log: Logger
 ) : CallbackViewModel() {
 
-    override val viewModel = ChessGameViewModel(gameId, useCases, log)
+    override val viewModel = ChessGameViewModel(chessGame, log)
 
     val chessGameState = viewModel.chessGameState.asCallbacks()
 

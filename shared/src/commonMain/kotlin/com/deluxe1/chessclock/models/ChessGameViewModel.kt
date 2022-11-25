@@ -13,8 +13,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ChessGameViewModel(
-    private val gameId: Long,
-    private val useCases: UseCases,
+    private val chessGame: ChessGame,
     log: Logger
 ) : ViewModel() {
     private val log = log.withTag("ChessGamesViewModel")
@@ -52,9 +51,7 @@ class ChessGameViewModel(
 
     init {
         viewModelScope.launch {
-            useCases.getChessGameById(gameId).collect { game ->
-                mutableChessGameState.value = ChessGameViewState(game)
-            }
+            mutableChessGameState.value = ChessGameViewState(chessGame)
             chessGameState.collect {
                 if (it.activePlayer != null && it.activePlayer.timeInMillis <= 0) timer.cancel()
             }

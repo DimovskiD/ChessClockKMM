@@ -44,19 +44,27 @@ class ChessGamePickerViewModel(
         }
     }
 
-    fun createChessGame(name: String, durationInMinutes: Int, incrementInSeconds: Int, id : Long = -1L) : ChessGame {
+    fun insertChessGame(
+        name: String,
+        durationInMinutes: Int,
+        incrementInSeconds: Int,
+        id: Long = -1L
+    ) {
         val duration = durationInMinutes * 60 * 1000L
         val increment = incrementInSeconds.toLong()
-        return ChessGame(name = name, time =  duration, increment = increment, id = id)
+        insertChessGame(ChessGame(name = name, time = duration, increment = increment, id = id))
     }
 
-    fun insertChessGame(game: ChessGame): Job {
+    fun isValid(name: String, durationInMinutes: Int, incrementInSeconds: Int) =
+        name.isNotEmpty() && durationInMinutes > 0
+
+    private fun insertChessGame(game: ChessGame): Job {
         return viewModelScope.launch {
             useCases.upsertChessGame(game)
         }
     }
 
-    fun deleteChessGame(game: ChessGame) : Job {
+    fun deleteChessGame(game: ChessGame): Job {
         return viewModelScope.launch {
             useCases.deleteChessGame(game)
         }
