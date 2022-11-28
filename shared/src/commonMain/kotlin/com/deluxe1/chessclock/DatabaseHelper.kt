@@ -30,7 +30,7 @@ class DatabaseHelper(
         log.d { "Inserting ${games.size} games into database" }
         dbRef.transactionWithContext(backgroundDispatcher) {
             games.forEach { game ->
-                dbRef.tableQueries.addChessGame(game.name, game.time, game.increment)
+                dbRef.tableQueries.addChessGame(game.name, game.time, game.increment, if (game.id >=0 ) game.id else null)
             }
         }
     }

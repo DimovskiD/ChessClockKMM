@@ -48,7 +48,7 @@ class ChessGamePickerViewModel(
         name: String,
         durationInMinutes: Int,
         incrementInSeconds: Int,
-        id: Long = -1L
+        id: Long
     ) {
         val duration = durationInMinutes * 60 * 1000L
         val increment = incrementInSeconds.toLong()
@@ -65,6 +65,7 @@ class ChessGamePickerViewModel(
     }
 
     fun deleteChessGame(game: ChessGame): Job {
+        log.i("DELETE GAME $game")
         return viewModelScope.launch {
             useCases.deleteChessGame(game)
         }

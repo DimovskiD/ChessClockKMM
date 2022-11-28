@@ -46,7 +46,7 @@ struct ChessGameScreen: View {
     @StateObject
     var observableModel = ObservableChessGameModel()
     var game: ChessGame
-    
+
     var body: some View {
         VStack {
             ZStack {

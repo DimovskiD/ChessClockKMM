@@ -12,8 +12,8 @@ getAllChessGames:
 SELECT * FROM ChessGame;
 
 addChessGame:
-INSERT OR IGNORE INTO ChessGame(name, time, increment)
-VALUES (?, ?, ?);
+INSERT OR REPLACE INTO ChessGame(name, time, increment, id)
+VALUES (?, ?, ?, ?);
 
 deleteChessGame:
 DELETE FROM ChessGame WHERE id =?;
