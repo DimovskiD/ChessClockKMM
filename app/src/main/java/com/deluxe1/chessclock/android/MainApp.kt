@@ -25,7 +25,7 @@ class MainApp : Application() {
                 single<SharedPreferences> {
                     get<Context>().getSharedPreferences("CHESS_CLOCK_SETTINGS", Context.MODE_PRIVATE)
                 }
-                single<AppInfo> { com.deluxe1.chessclock.android.AndroidAppInfo }
+                single<AppInfo> { AndroidAppInfo }
                 single {
                     { Log.i("Startup", "Hello from Android/Kotlin!") }
                 }
@@ -35,5 +35,5 @@ class MainApp : Application() {
 }
 
 object AndroidAppInfo : AppInfo {
-    override val appId: String = com.deluxe1.chessclock.android.BuildConfig.APPLICATION_ID
+    override val appId: String = BuildConfig.APPLICATION_ID
 }

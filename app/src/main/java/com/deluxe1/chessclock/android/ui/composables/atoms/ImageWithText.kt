@@ -1,4 +1,4 @@
-package com.deluxe1.chessclock.android.ui.composables
+package com.deluxe1.chessclock.android.ui.composables.atoms
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row

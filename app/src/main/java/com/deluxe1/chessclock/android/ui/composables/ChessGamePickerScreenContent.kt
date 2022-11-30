@@ -15,6 +15,8 @@ fun ChessGamePickerScreenContent(
     onSuccess: (List<ChessGame>) -> Unit = {},
     onError: (String) -> Unit = {},
     onOpen: (ChessGame) -> Unit = {},
+    onEdit: (ChessGame) -> Unit = {},
+    onDelete: (ChessGame) -> Unit = {},
     onCreateNewClicked: () -> Unit = {}
 ) {
     Surface(
@@ -29,7 +31,7 @@ fun ChessGamePickerScreenContent(
             LaunchedEffect(games) {
                 onSuccess(games)
             }
-            SuccessChessGamePicker(successData = games, onOpen, onCreateNewClicked)
+            SuccessChessGamePicker(successData = games, onOpen, onEdit, onDelete, onCreateNewClicked)
         }
         val error = chessGameState.error
         if (error != null) {

@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import com.deluxe1.chessclock.android.R
-import com.deluxe1.chessclock.android.ui.composables.ImageWithText
+import com.deluxe1.chessclock.android.ui.composables.atoms.ImageWithText
 import com.deluxe1.chessclock.formatTime
 
 @Composable

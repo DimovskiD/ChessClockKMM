@@ -11,11 +11,13 @@ import co.touchlab.kermit.Logger
 import com.deluxe1.chessclock.android.ui.composables.ChessGamePickerScreenContent
 import com.deluxe1.chessclock.db.ChessGame
 import com.deluxe1.chessclock.models.ChessGamePickerViewModel
+import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun ChessGamePickerScreen(
-    viewModel: ChessGamePickerViewModel,
+    viewModel: ChessGamePickerViewModel = getViewModel(),
     onAddNewClicked: () -> Unit,
+    onEdit: (ChessGame) -> Unit = {},
     onNavigateToChessGame: (ChessGame) -> Unit,
     log: Logger
 ) {
@@ -30,6 +32,8 @@ fun ChessGamePickerScreen(
     ChessGamePickerScreenContent(
         chessGameState = chessGameState,
         onSuccess = { data -> log.v { "View updating with ${data.size} games" } },
+        onEdit = { onEdit(it) },
+        onDelete = { viewModel.deleteChessGame(it) },
         onError = { exception -> log.e { "Displaying error: $exception" } },
         onOpen = { onNavigateToChessGame(it) },
         onCreateNewClicked = { onAddNewClicked() }

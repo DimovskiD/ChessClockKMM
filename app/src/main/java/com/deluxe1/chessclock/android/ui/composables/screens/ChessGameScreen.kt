@@ -24,14 +24,15 @@ import com.deluxe1.chessclock.android.ui.composables.organisms.ChessGamePlayerCo
 import com.deluxe1.chessclock.data.GameState
 import com.deluxe1.chessclock.models.ChessGameViewModel
 import co.touchlab.kermit.Logger
+import com.deluxe1.chessclock.db.ChessGame
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
 fun ChessGameScreen(
-    gameId: Long? = -1L,
+    chessGame: ChessGame,
     log: Logger,
-    viewModel: ChessGameViewModel = getViewModel(parameters = { parametersOf(gameId) })
+    viewModel: ChessGameViewModel = getViewModel(parameters = { parametersOf(chessGame) })
 ) {
 
     val chessGameState = viewModel.chessGameState.collectAsState()
@@ -60,7 +61,11 @@ fun ChessGameScreen(
         Row(modifier = Modifier.align(Alignment.Center)) {
             if (chessGameState.value.gameState == GameState.FINISHED) {
                 RestartButton(viewModel::onRestartClicked)
-                Toast.makeText(LocalContext.current, "${viewModel.getWinner()?.playerColor} player wins", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    LocalContext.current,
+                    "${viewModel.getWinner()?.playerColor} player wins",
+                    Toast.LENGTH_LONG
+                ).show()
             } else {
                 IconButton(
                     onClick = { viewModel.playPauseClicked() },

@@ -45,7 +45,9 @@ fun ErrorChessGamePicker(error: String) {
 fun SuccessChessGamePicker(
     successData: List<ChessGame>,
     onOpen: (ChessGame) -> Unit,
+    onEdit: (ChessGame) -> Unit,
+    onDelete: (ChessGame) -> Unit,
     onCreateNew: () -> Unit
 ) {
-    ChessGamesGrid(games = successData, onOpen, onCreateNew = onCreateNew)
+    ChessGamesGrid(games = successData, onOpen, onCreateNew = onCreateNew, onEdit = onEdit, onDelete = onDelete)
 }
