@@ -6,6 +6,7 @@ import co.touchlab.kermit.Logger
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -43,6 +44,9 @@ class ChessGamePickerViewModel(
             }
         }
     }
+
+    fun getGameById(id: Long?) = if (id != null) useCases.getChessGameById(id)
+    else flowOf(null)
 
     fun insertChessGame(
         name: String,

@@ -12,5 +12,9 @@ enum class Destinations(
     GameScreen(
         "game-screen", "game-screen/{gameId}",
         listOf(navArgument("gameId") { type = androidx.navigation.NavType.LongType })
+    ),
+    GameDetailsScreen(
+        "game-details", "game-details/{gameId}",
+        listOf(navArgument("gameId") { type = androidx.navigation.NavType.LongType })
     )
 }

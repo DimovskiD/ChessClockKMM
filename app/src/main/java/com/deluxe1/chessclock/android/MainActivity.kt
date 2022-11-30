@@ -10,6 +10,7 @@ import co.touchlab.kermit.Logger
 import com.deluxe1.chessclock.android.ui.Destinations
 import com.deluxe1.chessclock.android.ui.composables.screens.ChessGamePickerScreen
 import com.deluxe1.chessclock.android.ui.composables.screens.ChessGameScreen
+import com.deluxe1.chessclock.android.ui.composables.screens.GameDetailsScreen
 import com.deluxe1.chessclock.android.ui.theme.ChessClockTheme
 import com.deluxe1.chessclock.injectLogger
 import com.deluxe1.chessclock.models.ChessGamePickerViewModel
@@ -31,8 +32,9 @@ class MainActivity : ComponentActivity(), KoinComponent {
                     composable(Destinations.GamePicker.destinationWithArguments) {
                         ChessGamePickerScreen(
                             chessGamePickerViewModel,
-                            { navController.navigate("${Destinations.GameScreen.destination}/${it.id}") },
-                            log
+                            onNavigateToChessGame = { navController.navigate("${Destinations.GameScreen.destination}/${it.id}") },
+                            onAddNewClicked =  { navController.navigate(Destinations.GameDetailsScreen.destination)},
+                            log = log
                         )
                     }
                     composable(
@@ -40,6 +42,17 @@ class MainActivity : ComponentActivity(), KoinComponent {
                         arguments = Destinations.GameScreen.arguments
                     ) {
                         ChessGameScreen(it.arguments?.getLong(Destinations.GameScreen.arguments[0].name), log)
+                    }
+                    composable(
+                        Destinations.GameDetailsScreen.destinationWithArguments,
+                        arguments = Destinations.GameDetailsScreen.arguments
+                    ) {
+                        GameDetailsScreen(chessGameId = it.arguments?.getLong(Destinations.GameDetailsScreen.arguments[0].name), log = log)
+                    }
+                    composable(
+                        Destinations.GameDetailsScreen.destination,
+                    ) {
+                        GameDetailsScreen(log = log)
                     }
                 }
             }
