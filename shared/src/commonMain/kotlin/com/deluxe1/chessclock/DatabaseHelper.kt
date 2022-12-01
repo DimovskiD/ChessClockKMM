@@ -1,9 +1,9 @@
 package com.deluxe1.chessclock
 
 import com.deluxe1.chessclock.db.ChessGame
-import com.deluxe1.chessclock.db.KaMPKitDb
 import com.deluxe1.chessclock.sqldelight.transactionWithContext
 import co.touchlab.kermit.Logger
+import com.deluxe1.chessclock.db.ChessClockDb
 import com.squareup.sqldelight.db.SqlDriver
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
@@ -17,7 +17,7 @@ class DatabaseHelper(
     private val log: Logger,
     private val backgroundDispatcher: CoroutineDispatcher
 ) {
-    private val dbRef: KaMPKitDb = KaMPKitDb(sqlDriver)
+    private val dbRef: ChessClockDb = ChessClockDb(sqlDriver)
 
     fun getAllChessGames(): Flow<List<ChessGame>> =
         dbRef.tableQueries

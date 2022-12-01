@@ -1,6 +1,6 @@
 package com.deluxe1.chessclock
 
-import com.deluxe1.chessclock.db.KaMPKitDb
+import com.deluxe1.chessclock.db.ChessClockDb
 import com.russhwolf.settings.Settings
 import com.russhwolf.settings.SharedPreferencesSettings
 import com.squareup.sqldelight.android.AndroidSqliteDriver
@@ -12,7 +12,7 @@ import org.koin.dsl.module
 actual val platformModule: Module = module {
     single<SqlDriver> {
         AndroidSqliteDriver(
-            KaMPKitDb.Schema,
+            ChessClockDb.Schema,
             get(),
             "ChessClockDb"
         )

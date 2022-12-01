@@ -1,7 +1,7 @@
 package com.deluxe1.chessclock
 
-import com.deluxe1.chessclock.db.KaMPKitDb
 import co.touchlab.kermit.Logger
+import com.deluxe1.chessclock.db.ChessClockDb
 import com.deluxe1.chessclock.db.ChessGame
 import com.russhwolf.settings.NSUserDefaultsSettings
 import com.russhwolf.settings.Settings
@@ -28,7 +28,7 @@ fun initKoinIos(
 )
 
 actual val platformModule = module {
-    single<SqlDriver> { NativeSqliteDriver(KaMPKitDb.Schema, "ChessGamesDb") }
+    single<SqlDriver> { NativeSqliteDriver(ChessClockDb.Schema, "ChessGamesDb") }
 
     single { Darwin.create() }
 
