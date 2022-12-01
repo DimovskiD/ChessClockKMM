@@ -30,8 +30,8 @@
 
 /* Begin PBXBuildFile section */
 		46EB2E000002B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46EB2E000002A0 /* Foundation.framework */; };
-		46EB2E00000320 /* Pods-KaMPKitiOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000310 /* Pods-KaMPKitiOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		46EB2E00000370 /* Pods-KaMPKitiOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000360 /* Pods-KaMPKitiOS-dummy.m */; };
+		46EB2E00000320 /* Pods-ChessClockIOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000310 /* Pods-ChessClockIOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		46EB2E00000370 /* Pods-ChessClockIOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000360 /* Pods-ChessClockIOS-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,16 +60,16 @@
 		46EB2E000001E0 /* shared.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = shared.debug.xcconfig; sourceTree = "<group>"; };
 		46EB2E000001F0 /* shared.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = shared.release.xcconfig; sourceTree = "<group>"; };
 		46EB2E000002A0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		46EB2E000002D0 /* Pods-KaMPKitiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KaMPKitiOS.release.xcconfig"; sourceTree = "<group>"; };
-		46EB2E000002E0 /* Pods-KaMPKitiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KaMPKitiOS.debug.xcconfig"; sourceTree = "<group>"; };
-		46EB2E000002F0 /* Pods-KaMPKitiOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-KaMPKitiOS-Info.plist"; sourceTree = "<group>"; };
-		46EB2E00000300 /* Pods-KaMPKitiOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-KaMPKitiOS.modulemap"; sourceTree = "<group>"; };
-		46EB2E00000310 /* Pods-KaMPKitiOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-KaMPKitiOS-umbrella.h"; sourceTree = "<group>"; };
-		46EB2E00000330 /* Pods-KaMPKitiOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KaMPKitiOS-frameworks.sh"; sourceTree = "<group>"; };
-		46EB2E00000340 /* Pods-KaMPKitiOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-KaMPKitiOS-acknowledgements.plist"; sourceTree = "<group>"; };
-		46EB2E00000350 /* Pods-KaMPKitiOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-KaMPKitiOS-acknowledgements.markdown"; sourceTree = "<group>"; };
-		46EB2E00000360 /* Pods-KaMPKitiOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-KaMPKitiOS-dummy.m"; sourceTree = "<group>"; };
-		4EDB9C40CD3583B30579DB2BE865F1D3 /* Pods-KaMPKitiOS */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-KaMPKitiOS"; path = Pods_KaMPKitiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		46EB2E000002D0 /* Pods-ChessClockIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ChessClockIOS.release.xcconfig"; sourceTree = "<group>"; };
+		46EB2E000002E0 /* Pods-ChessClockIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ChessClockIOS.debug.xcconfig"; sourceTree = "<group>"; };
+		46EB2E000002F0 /* Pods-ChessClockIOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ChessClockIOS-Info.plist"; sourceTree = "<group>"; };
+		46EB2E00000300 /* Pods-ChessClockIOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ChessClockIOS.modulemap"; sourceTree = "<group>"; };
+		46EB2E00000310 /* Pods-ChessClockIOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ChessClockIOS-umbrella.h"; sourceTree = "<group>"; };
+		46EB2E00000330 /* Pods-ChessClockIOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ChessClockIOS-frameworks.sh"; sourceTree = "<group>"; };
+		46EB2E00000340 /* Pods-ChessClockIOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ChessClockIOS-acknowledgements.plist"; sourceTree = "<group>"; };
+		46EB2E00000350 /* Pods-ChessClockIOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ChessClockIOS-acknowledgements.markdown"; sourceTree = "<group>"; };
+		46EB2E00000360 /* Pods-ChessClockIOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ChessClockIOS-dummy.m"; sourceTree = "<group>"; };
+		4A43A9CB0DAA272769218A5C00A964A7 /* Pods-ChessClockIOS */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-ChessClockIOS"; path = Pods_ChessClockIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +99,7 @@
 		46EB2E00000020 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4EDB9C40CD3583B30579DB2BE865F1D3 /* Pods-KaMPKitiOS */,
+				4A43A9CB0DAA272769218A5C00A964A7 /* Pods-ChessClockIOS */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,7 +115,7 @@
 		46EB2E00000070 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				46EB2E000002C0 /* Pods-KaMPKitiOS */,
+				46EB2E000002C0 /* Pods-ChessClockIOS */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
@@ -200,21 +200,21 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		46EB2E000002C0 /* Pods-KaMPKitiOS */ = {
+		46EB2E000002C0 /* Pods-ChessClockIOS */ = {
 			isa = PBXGroup;
 			children = (
-				46EB2E00000300 /* Pods-KaMPKitiOS.modulemap */,
-				46EB2E00000350 /* Pods-KaMPKitiOS-acknowledgements.markdown */,
-				46EB2E00000340 /* Pods-KaMPKitiOS-acknowledgements.plist */,
-				46EB2E00000360 /* Pods-KaMPKitiOS-dummy.m */,
-				46EB2E00000330 /* Pods-KaMPKitiOS-frameworks.sh */,
-				46EB2E000002F0 /* Pods-KaMPKitiOS-Info.plist */,
-				46EB2E00000310 /* Pods-KaMPKitiOS-umbrella.h */,
-				46EB2E000002E0 /* Pods-KaMPKitiOS.debug.xcconfig */,
-				46EB2E000002D0 /* Pods-KaMPKitiOS.release.xcconfig */,
+				46EB2E00000300 /* Pods-ChessClockIOS.modulemap */,
+				46EB2E00000350 /* Pods-ChessClockIOS-acknowledgements.markdown */,
+				46EB2E00000340 /* Pods-ChessClockIOS-acknowledgements.plist */,
+				46EB2E00000360 /* Pods-ChessClockIOS-dummy.m */,
+				46EB2E00000330 /* Pods-ChessClockIOS-frameworks.sh */,
+				46EB2E000002F0 /* Pods-ChessClockIOS-Info.plist */,
+				46EB2E00000310 /* Pods-ChessClockIOS-umbrella.h */,
+				46EB2E000002E0 /* Pods-ChessClockIOS.debug.xcconfig */,
+				46EB2E000002D0 /* Pods-ChessClockIOS.release.xcconfig */,
 			);
-			name = "Pods-KaMPKitiOS";
-			path = "Target Support Files/Pods-KaMPKitiOS";
+			name = "Pods-ChessClockIOS";
+			path = "Target Support Files/Pods-ChessClockIOS";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,16 +224,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46EB2E00000320 /* Pods-KaMPKitiOS-umbrella.h in Headers */,
+				46EB2E00000320 /* Pods-ChessClockIOS-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		FA6E46E8E7462D72AFBDCEA698D24977 /* Pods-KaMPKitiOS */ = {
+		4B6562FC4406CA54CAC9690787D57BBF /* Pods-ChessClockIOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 46EB2E00000210 /* Build configuration list for PBXNativeTarget "Pods-KaMPKitiOS" */;
+			buildConfigurationList = 46EB2E00000210 /* Build configuration list for PBXNativeTarget "Pods-ChessClockIOS" */;
 			buildPhases = (
 				46EB2E00000250 /* Headers */,
 				46EB2E00000260 /* Sources */,
@@ -246,9 +246,9 @@
 				46EB2E000003A0 /* PBXTargetDependency */,
 				46EB2E000003C0 /* PBXTargetDependency */,
 			);
-			name = "Pods-KaMPKitiOS";
-			productName = Pods_KaMPKitiOS;
-			productReference = 4EDB9C40CD3583B30579DB2BE865F1D3 /* Pods-KaMPKitiOS */;
+			name = "Pods-ChessClockIOS";
+			productName = Pods_ChessClockIOS;
+			productReference = 4A43A9CB0DAA272769218A5C00A964A7 /* Pods-ChessClockIOS */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -273,7 +273,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FA6E46E8E7462D72AFBDCEA698D24977 /* Pods-KaMPKitiOS */,
+				4B6562FC4406CA54CAC9690787D57BBF /* Pods-ChessClockIOS */,
 				8777C9F6889E59EFFD631D80AEE9048B /* shared */,
 				52B60EC2A583F24ACBB69C113F5488B9 /* SwiftLint */,
 			);
@@ -308,7 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46EB2E00000370 /* Pods-KaMPKitiOS-dummy.m in Sources */,
+				46EB2E00000370 /* Pods-ChessClockIOS-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,7 +528,7 @@
 		};
 		46EB2E00000220 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 46EB2E000002D0 /* Pods-KaMPKitiOS.release.xcconfig */;
+			baseConfigurationReference = 46EB2E000002D0 /* Pods-ChessClockIOS.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -540,7 +540,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-KaMPKitiOS/Pods-KaMPKitiOS-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-ChessClockIOS/Pods-ChessClockIOS-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -549,7 +549,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-KaMPKitiOS/Pods-KaMPKitiOS.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-ChessClockIOS/Pods-ChessClockIOS.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -566,7 +566,7 @@
 		};
 		46EB2E00000230 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 46EB2E000002E0 /* Pods-KaMPKitiOS.debug.xcconfig */;
+			baseConfigurationReference = 46EB2E000002E0 /* Pods-ChessClockIOS.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -578,7 +578,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-KaMPKitiOS/Pods-KaMPKitiOS-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-ChessClockIOS/Pods-ChessClockIOS-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -587,7 +587,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-KaMPKitiOS/Pods-KaMPKitiOS.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-ChessClockIOS/Pods-ChessClockIOS.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -631,7 +631,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		46EB2E00000210 /* Build configuration list for PBXNativeTarget "Pods-KaMPKitiOS" */ = {
+		46EB2E00000210 /* Build configuration list for PBXNativeTarget "Pods-ChessClockIOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				46EB2E00000230 /* Debug */,

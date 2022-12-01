@@ -7,9 +7,9 @@
 //
 
 import XCTest
-@testable import KaMPKitiOS
+@testable import ChessClockIOS
 
-class KaMPKitiOSTests: XCTestCase {
+class ChessClockiOSTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

@@ -1,6 +1,5 @@
 //
 //  ChessGamePickerScreen.swift
-//  KaMPKitiOS
 //
 //  Created by Daniel Dimovski on 16.11.22.
 //  Copyright © 2022 Touchlab. All rights reserved.
