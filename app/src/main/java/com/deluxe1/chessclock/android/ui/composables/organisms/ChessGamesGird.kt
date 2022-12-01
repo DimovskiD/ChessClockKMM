@@ -12,7 +12,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.deluxe1.chessclock.android.ui.composables.organisms.ChessGameGridCell
+import com.deluxe1.chessclock.android.ui.composables.molecules.ChessGameGridCell
+import com.deluxe1.chessclock.android.ui.composables.atoms.NewGameGridCell
 import com.deluxe1.chessclock.android.ui.getColorForIndex
 import com.deluxe1.chessclock.db.ChessGame
 

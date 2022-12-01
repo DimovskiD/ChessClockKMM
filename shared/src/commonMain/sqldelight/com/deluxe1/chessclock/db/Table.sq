@@ -5,6 +5,17 @@ time INTEGER NOT NULL,
 increment INTEGER NOT NULL
 );
 
+INSERT INTO ChessGame(name, time, increment, id)
+VALUES
+    ("Blitz", 300000, 0, 1),
+    ("Blitz Increment", 180000, 2, 2),
+    ("Bullet", 60000, 0, 3),
+    ("Bullet Increment", 1200000, 1, 4),
+    ("Classical", 900000, 0, 5),
+    ("Classical Increment", 900000, 15, 6),
+    ("Rapid", 600000, 0, 7),
+    ("Rapid Increment", 600000, 10, 8);
+
 getChessGameById:
 SELECT * FROM ChessGame WHERE id = ?;
 

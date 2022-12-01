@@ -1,4 +1,4 @@
-package com.deluxe1.chessclock.android.ui.composables
+package com.deluxe1.chessclock.android.ui.composables.atoms
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.deluxe1.chessclock.android.ui.composables.ChessGamesGrid
 import com.deluxe1.chessclock.db.ChessGame
 
 @Composable

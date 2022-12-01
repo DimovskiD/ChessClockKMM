@@ -16,6 +16,7 @@
         tools:ignore="DataExtractionRules">
         <activity
             android:name="com.deluxe1.chessclock.android.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

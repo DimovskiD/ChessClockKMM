@@ -45,9 +45,6 @@ class ChessGamePickerViewModel(
         }
     }
 
-    fun getGameById(id: Long?) = if (id != null) useCases.getChessGameById(id)
-    else flowOf(null)
-
     fun insertChessGame(
         name: String,
         durationInMinutes: Int,
@@ -60,7 +57,7 @@ class ChessGamePickerViewModel(
     }
 
     fun isValid(name: String, durationInMinutes: Int, incrementInSeconds: Int) =
-        name.isNotEmpty() && durationInMinutes > 0
+        name.isNotEmpty() && durationInMinutes > 0 && incrementInSeconds >= 0
 
     private fun insertChessGame(game: ChessGame): Job {
         return viewModelScope.launch {

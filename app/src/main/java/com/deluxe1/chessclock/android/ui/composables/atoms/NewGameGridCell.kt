@@ -1,4 +1,4 @@
-package com.deluxe1.chessclock.android.ui.composables
+package com.deluxe1.chessclock.android.ui.composables.atoms
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -30,8 +30,8 @@ fun NewGameGridCell(
         .aspectRatio(1f)
         .clickable { onClick() }, verticalAlignment = Alignment.CenterVertically) {
         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
-            Icon(Icons.Default.Add, contentDescription = "Add", Modifier.size(130.dp))
-            Text(text = "Custom Game", style = MaterialTheme.typography.h5)
+            Icon(Icons.Default.Add, contentDescription = "Add", Modifier.size(130.dp), tint = Color.Black)
+            Text(text = "Custom Game", style = MaterialTheme.typography.h5, color = Color.Black)
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.deluxe1.chessclock.android.ui.composables.organisms
+package com.deluxe1.chessclock.android.ui.composables.molecules
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

@@ -2,6 +2,7 @@ package com.deluxe1.chessclock.android.ui.composables.screens
 
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,10 +21,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.deluxe1.chessclock.android.R
-import com.deluxe1.chessclock.android.ui.composables.organisms.ChessGamePlayerComponent
+import com.deluxe1.chessclock.android.ui.composables.molecules.ChessGamePlayerComponent
 import com.deluxe1.chessclock.data.GameState
 import com.deluxe1.chessclock.models.ChessGameViewModel
 import co.touchlab.kermit.Logger
+import com.deluxe1.chessclock.android.ui.composables.atoms.RestartButton
+import com.deluxe1.chessclock.android.ui.theme.ChessClockTheme
 import com.deluxe1.chessclock.db.ChessGame
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
@@ -34,7 +37,6 @@ fun ChessGameScreen(
     log: Logger,
     viewModel: ChessGameViewModel = getViewModel(parameters = { parametersOf(chessGame) })
 ) {
-
     val chessGameState = viewModel.chessGameState.collectAsState()
     Box {
         Column {
@@ -69,7 +71,13 @@ fun ChessGameScreen(
             } else {
                 IconButton(
                     onClick = { viewModel.playPauseClicked() },
-                    modifier = Modifier.background(Color.Gray, CircleShape)
+                    modifier = Modifier
+                        .background(
+                            color = if (chessGameState.value.gameState != GameState.RESUMED)
+                                ChessClockTheme.colors.primary
+                            else ChessClockTheme.colors.primaryVariant, CircleShape
+                        )
+                        .clickable { viewModel.playPauseClicked() }
                 ) {
                     Icon(
                         painter = painterResource(
@@ -86,22 +94,5 @@ fun ChessGameScreen(
                 }
             }
         }
-    }
-}
-
-@Composable
-private fun RestartButton(
-    onRestart: () -> Unit
-) {
-    IconButton(
-        onClick = { onRestart() },
-        modifier = Modifier.background(Color.Gray, CircleShape)
-    ) {
-        Icon(
-            painter = painterResource(
-                id = R.drawable.ic_baseline_restart_alt_24
-            ),
-            contentDescription = null
-        )
     }
 }

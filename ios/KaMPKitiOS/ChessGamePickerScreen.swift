@@ -114,9 +114,9 @@ struct ChessGamesListContent: View {
 
     var body: some View {
         ZStack {
-            VStack {
-                if let chessGames = chessGames {
-                    NavigationView {
+            NavigationView {
+                VStack {
+                    if let chessGames = chessGames {
                         List(chessGames, id: \.id) { game in
                             NavigationLink {
                                 ChessGameScreen(game: game)
@@ -127,37 +127,37 @@ struct ChessGamesListContent: View {
                                     Label("Delete", systemImage: "xmark.bin")
                                 })
                                 .tint(.red)
-                              }.swipeActions(edge: .leading) {
-                                  Button(action: {
-                                      chessGame = game
-                                      showingBottomSheet.toggle()
-                                  }, label: {
-                                      Label("Edit", systemImage: "xmark.bin")
-                                  })
-                                  .tint(.orange)
-                                }
+                            }.swipeActions(edge: .leading) {
+                                Button(action: {
+                                    chessGame = game
+                                    showingBottomSheet.toggle()
+                                }, label: {
+                                    Label("Edit", systemImage: "xmark.bin")
+                                })
+                                .tint(.orange)
+                            }
                         }
                     }
+                    if let error = error {
+                        Text(error)
+                            .foregroundColor(.red)
+                    }
+                    Button("Custom game") {
+                        showingBottomSheet.toggle()
+                    }.sheet(isPresented: $showingBottomSheet) {
+                        AddChessGameListContent(game: chessGame, inputConfig: inputConfig,
+                                                onSaveGame: { gameId, name, duration, increment in
+                            onSaveGame(gameId, name, duration ?? Int64(0), increment ?? Int64(0))
+                            if gameId > -1 {
+                                showingBottomSheet.toggle()
+                            }
+                        }, onCancel: {
+                            showingBottomSheet.toggle() }, isValid: isValid).onDisappear(perform: {
+                                chessGame = nil
+                            })
+                    }
+                    if loading { Text("Loading..." + (chessGame?.name ?? "")) }
                 }
-                if let error = error {
-                    Text(error)
-                        .foregroundColor(.red)
-                }
-                Button("Add new") {
-                    showingBottomSheet.toggle()
-                }.sheet(isPresented: $showingBottomSheet) {
-                    AddChessGameListContent(game: chessGame, inputConfig: inputConfig,
-                                            onSaveGame: { gameId, name, duration, increment in
-                        onSaveGame(gameId, name, duration ?? Int64(0), increment ?? Int64(0))
-                        if gameId > -1 {
-                            showingBottomSheet.toggle()
-                        }
-                    }, onCancel: {
-                        showingBottomSheet.toggle() }, isValid: isValid).onDisappear(perform: {
-                        chessGame = nil
-                    })
-                }
-                if loading { Text("Loading..." + (chessGame?.name ?? "")) }
             }
         }
     }
@@ -187,7 +187,7 @@ struct AddChessGameListContent: View {
         self.inputConfig = inputConfig
         self.onSaveGame = onSaveGame
         self.onCancel = onCancel
-        self.increment = String(game?.increment ?? 0)
+        self.increment = game != nil ? String(game!.increment) : ""
         self.name = game?.name ?? ""
         self.durationInMinutes = ""
         self.isValid = isValid
@@ -204,13 +204,13 @@ struct AddChessGameListContent: View {
         NavigationView {
             Form {
                 Section(header: Text("Game details")) {
-                    TextField("Name", text: $name).onReceive(Just(name)) { newValue in
+                    FloatingTextField(title: "Name", text: $name).onReceive(Just(name)) { newValue in
                         let filtered = newValue.prefix(Int(inputConfig.maxCharsName))
                         if newValue != filtered {
                             self.name = String(filtered)
                         }
                     }
-                    TextField("Duration (minutes)", text: $durationInMinutes)
+                    FloatingTextField(title: "Duration (minutes)", text: $durationInMinutes)
                                 .keyboardType(.numberPad)
                                 .onReceive(Just(durationInMinutes)) { newValue in
                                     let filtered = newValue.prefix(Int(inputConfig.maxDigitsDuration)).filter {
@@ -220,7 +220,7 @@ struct AddChessGameListContent: View {
                                         self.durationInMinutes = filtered
                                     }
                                 }
-                    TextField("Increment (seconds)", text: $increment)
+                    FloatingTextField(title: "Increment (seconds)", text: $increment)
                                 .keyboardType(.numberPad)
                                 .onReceive(Just(increment)) { newValue in
                                     let filtered = newValue.prefix(Int(inputConfig.maxDigitsIncrement)).filter {
@@ -298,5 +298,22 @@ struct ChessGamePickerScreen_Previews: PreviewProvider {
             isValid: {_, _, _ in true},
             inputConfig: InputConfig(maxCharsName: 0, maxDigitsDuration: 0, maxDigitsIncrement: 0)
         )
+    }
+}
+
+struct FloatingTextField: View {
+    let title: String
+    let text: Binding<String>
+
+    var body: some View {
+        ZStack(alignment: .leading) {
+            Text(title)
+                .foregroundColor(text.wrappedValue.isEmpty ? Color(.placeholderText) : .accentColor)
+                .offset(y: text.wrappedValue.isEmpty ? 0 : -25)
+                .scaleEffect(text.wrappedValue.isEmpty ? 1 : 0.75, anchor: .leading)
+            TextField("", text: text)
+        }
+        .padding(.top, text.wrappedValue.isEmpty ? 0 : 15)
+            .animation(.spring(response: 0.4, dampingFraction: 0.3))
     }
 }

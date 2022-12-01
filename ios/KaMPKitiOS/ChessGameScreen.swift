@@ -31,6 +31,9 @@ class ObservableChessGameModel: ObservableObject {
         chessViewModel?.clear()
         chessViewModel = nil
     }
+    func getWinner() -> Player? {
+        return chessViewModel?.getWinner()
+    }
     func onPlayPausePressed() {
         chessViewModel?.playPauseClicked()
     }
@@ -46,60 +49,65 @@ struct ChessGameScreen: View {
     @StateObject
     var observableModel = ObservableChessGameModel()
     var game: ChessGame
+    @State
+    var showAlert = false
 
     var body: some View {
-        VStack {
-            ZStack {
-                VStack {
-                    Rectangle()
-                        .fill(.black)
-                        .frame(width: UIScreen.main.bounds.height/2,
-                               height: UIScreen.main.bounds.height/2,
-                               alignment: Alignment.top)
-                    Rectangle()
-                        .fill(.white)
-                        .frame(width: UIScreen.main.bounds.height/2,
-                               height: UIScreen.main.bounds.height/2,
-                               alignment: Alignment.top)
-                }.onTapGesture {
-                    observableModel.switchPlayer()
-                }
-                VStack {
-                    ChessGamePlayerComponent(
-                        timeRemaining: observableModel.chessGameState?.playerTwo.timeInMillis ?? 0,
-                        movesMade: observableModel.chessGameState?.playerTwo.movesMade ?? 0,
-                        color: .white
-                    ).rotationEffect(Angle(degrees: 180))
-                    ChessGamePlayerComponent(
-                        timeRemaining: observableModel.chessGameState?.playerOne.timeInMillis ?? 0,
-                        movesMade: observableModel.chessGameState?.playerOne.movesMade ?? 0,
-                        color: .black
-                    )
-                }.onTapGesture {
-                    observableModel.switchPlayer()
-                }
-                HStack {
-                    if observableModel.chessGameState?.gameState == GameState.finished {
+        ZStack {
+            VStack {
+                Rectangle()
+                    .fill(.black)
+                    .frame(width: UIScreen.main.bounds.height/2,
+                           height: UIScreen.main.bounds.height/2,
+                           alignment: Alignment.top)
+                Rectangle()
+                    .fill(.white)
+                    .frame(width: UIScreen.main.bounds.height/2,
+                           height: UIScreen.main.bounds.height/2,
+                           alignment: Alignment.top)
+            }.onTapGesture {
+                observableModel.switchPlayer()
+            }
+            VStack {
+                ChessGamePlayerComponent(
+                    timeRemaining: observableModel.chessGameState?.playerTwo.timeInMillis ?? 0,
+                    movesMade: observableModel.chessGameState?.playerTwo.movesMade ?? 0,
+                    color: .white
+                ).rotationEffect(Angle(degrees: 180))
+                ChessGamePlayerComponent(
+                    timeRemaining: observableModel.chessGameState?.playerOne.timeInMillis ?? 0,
+                    movesMade: observableModel.chessGameState?.playerOne.movesMade ?? 0,
+                    color: .black
+                )
+            }.onTapGesture {
+                observableModel.switchPlayer()
+            }
+            HStack {
+                if observableModel.chessGameState?.gameState == GameState.finished {
+                    Button(action: { observableModel.onRestartClicked() }, label: {
+                        Image(uiImage: UIImage(systemName: "restart")!).padding()
+                    }).background(Color.gray).cornerRadius(25).onAppear(perform: {
+                        showAlert = true
+                    }).alert(isPresented: $showAlert) {
+                        Alert(title: Text((observableModel.getWinner()?.playerColor.name ?? "") + " player wins"))
+                    }
+                } else {
+                    Button(action: { observableModel.onPlayPausePressed() }, label: {
+                        if observableModel.chessGameState?.gameState == GameState.resumed {
+                            Image(uiImage: UIImage(systemName: "pause.fill")!).padding()
+                        } else {
+                            Image(uiImage: UIImage(systemName: "play.fill")!).padding()
+                        }
+                    }).background(Color.gray).cornerRadius(25)
+                    if observableModel.chessGameState?.gameState == GameState.paused {
                         Button(action: { observableModel.onRestartClicked() }, label: {
                             Image(uiImage: UIImage(systemName: "restart")!).padding()
                         }).background(Color.gray).cornerRadius(25)
-                    } else {
-                        Button(action: { observableModel.onPlayPausePressed() }, label: {
-                            if observableModel.chessGameState?.gameState == GameState.resumed {
-                                Image(uiImage: UIImage(systemName: "pause.fill")!).padding()
-                            } else {
-                                Image(uiImage: UIImage(systemName: "play.fill")!).padding()
-                            }
-                        }).background(Color.gray).cornerRadius(25)
-                        if observableModel.chessGameState?.gameState == GameState.paused {
-                            Button(action: { observableModel.onRestartClicked() }, label: {
-                                Image(uiImage: UIImage(systemName: "restart")!).padding()
-                            }).background(Color.gray).cornerRadius(25)
-                        }
                     }
                 }
             }
-        }.onAppear(perform: {
+        }
+        .onAppear(perform: {
             observableModel.activate(game: game)
         })
         .onDisappear(perform: {
