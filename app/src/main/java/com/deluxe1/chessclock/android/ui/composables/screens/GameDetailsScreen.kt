@@ -47,7 +47,7 @@ fun GameDetailsScreen(
     var duration by remember { mutableStateOf(if (chessGame != null) (chessGame.time / 1000 / 60).toString() else "") }
     var increment by remember { mutableStateOf(chessGame?.increment?.toString() ?: "") }
     var isChecked by remember { mutableStateOf(true) }
-    val editMode by remember { mutableStateOf(chessGame?.id != -1L) }
+    val editMode by remember { mutableStateOf(chessGame != null) }
 
     Column(
         modifier = modifier
